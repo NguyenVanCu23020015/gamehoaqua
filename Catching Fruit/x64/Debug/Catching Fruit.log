@@ -1,0 +1,3 @@
+﻿Game.obj : error LNK2019: unresolved external symbol IMG_Load referenced in function "struct SDL_Surface * __cdecl SDLGame::LoadImageA(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)" (?LoadImageA@SDLGame@@YAPEAUSDL_Surface@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z)
+C:\Users\Admin\Downloads\Game-Catching-Fruit-master\Game-Catching-Fruit-master\SDL lib\SDL_image_1_2_4\SDL_image_1_2_4\lib\SDL_image.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
+C:\Users\Admin\Downloads\Game-Catching-Fruit-master\Game-Catching-Fruit-master\x64\Debug\Catching Fruit.exe : fatal error LNK1120: 1 unresolved externals
