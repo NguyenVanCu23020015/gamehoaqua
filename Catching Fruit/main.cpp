@@ -3,11 +3,14 @@
 #include "BaseObject.h"
 #include "FruitObject.h"
 #include <SDL_ttf.h>
+#include "SDL_mixer.h"
 #pragma warning(disable:4996)
 #undef main
 
 SDL_Color gTextColor = { 0x00, 0x00, 0x00 };
 SDL_Color gTextColormark = { 0xFF, 0x00, 0x00 };
+Mix_Chunk* gScratch = NULL;
+Mix_Chunk* game_over = NULL;
 
 int ShowMenu(SDL_Surface* gscreen, TTF_Font* font) {
 	int time = 0;
@@ -22,9 +25,9 @@ int ShowMenu(SDL_Surface* gscreen, TTF_Font* font) {
 	menu[1] = TTF_RenderText_Solid(font, labels[1], color[0]);
 	SDL_Rect pos[kMenuNum];
 	pos[0].x = (gscreen->clip_rect.w / 2) - (menu[0]->clip_rect.w / 2);
-	pos[0].y = (gscreen->clip_rect.h / 2) - (menu[0]->clip_rect.h);
+	pos[0].y = (gscreen->clip_rect.h / 2) - (menu[0]->clip_rect.h) + 100;
 	pos[1].x = (gscreen->clip_rect.w / 2) - (menu[0]->clip_rect.w / 2);
-	pos[1].y = (gscreen->clip_rect.h / 2) + (menu[0]->clip_rect.h);
+	pos[1].y = (gscreen->clip_rect.h / 2) + (menu[0]->clip_rect.h) + 100;
 
 	SDL_FillRect(gscreen, &gscreen->clip_rect, SDL_MapRGB(gscreen->format, 0x00, 0x00, 0x00));
 	SDL_Event event;
@@ -110,16 +113,30 @@ bool Init()
 	{
 		return false;
 	}
+	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0)
+	{
+		printf("SDL could not initialize! SDL Error: %s\n", SDL_GetError());
+		return false;
+	}
+	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
+	{
+		printf("SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError());
+		return false;
+	}
+
 	return true;
 }
 
 int main(int acr, char*argv[])
 {
+	
 	int mark = 0;
 	if (Init() == false)
 	{
 		return 0;
 	}
+	gScratch = Mix_LoadWAV("eat.wav");
+	game_over = Mix_LoadWAV("gameover.wav");
 
 	//load image
 	g_bkground = SDLGame::LoadImage("background1.png");
@@ -202,6 +219,8 @@ int main(int acr, char*argv[])
 	{
 		is_quit = true;
 	}
+	int gameover = 0;
+	
 	//Run
 	while (!is_quit)
 	{
@@ -250,6 +269,8 @@ int main(int acr, char*argv[])
 
 			if (is_col || is_col1 || is_col2 || is_col3)
 			{
+				Mix_PlayChannel(-1, gScratch, 0);
+
 				if (is_col3)
 				{
 					mark = mark + 5;
@@ -318,7 +339,12 @@ int main(int acr, char*argv[])
 		bool is_bomb = SDLGame::CheckCollision(human_object.GetRect(), p_bomb->GetRect());
 		if (count_die >= 3 || is_bomb)
 		{
+			if (gameover == 0) {
+				Mix_PlayChannel(-1, game_over, 0);
+				gameover = 1;
+			}
 			SDL_Delay(1000);
+
 			is_gameover = true;
 			SDLGame::CleanUp();
 			SDLGame::ApplySurface(g_bgexit, g_screen, 0, 0);
