@@ -33,7 +33,7 @@ Mô tả file code :
    - main.cpp: hàm xử lý chính, gồm: hàm menu, hàm gameover, xử lý di chuyển đối tượng chạy qua lại, ghi điểm số.
 
 Các kỹ thuật lập trình :
-- Thư viện SDL2 ( SDL Image,SDL ttf,SDL mixer)
+- Thư viện SDL ( SDL Image,SDL ttf,SDL mixer)
 - Lập trình hướng đối tượng (class)
 - Vòng lặp for,While
 - Cậu lệnh if else , switch case
