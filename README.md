@@ -43,6 +43,7 @@ Các kỹ thuật lập trình :
 - Cậu lệnh if else , switch case
 - Xâu
 - Con trỏ
-- Tự đánh giá:
+
+ Tự đánh giá:
 - Ngưỡng điểm em mong muốn là 8 điểm.
 
