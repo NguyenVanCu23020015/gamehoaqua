@@ -17,6 +17,7 @@ nghiệm vẻ đẹp của thế giới tự nhiên. Sẵn sàng để bắt đ�
 
 ![image](https://github.com/NguyenVanCu23020015/gamehoaqua/assets/167514616/ce8bb8d9-e275-497b-ab99-76b2317dd25e)
 
+
 Luật chơi:
   - Người chơi di chuyển bằng nút trái và phải.
   - Di chuyển ếch để ăn hoa quả rơi.
@@ -24,6 +25,9 @@ Luật chơi:
   - Đụng phải bom sẽ game over.
   - Bỏ sót 3 hoa quả  sẽ game over .
   - Bỏ sót ngôi sao không bị trừ điểm.
+
+Dưới đây là video chơi game :
+https://youtu.be/PL63xKBgTsY
 
 Mô tả file code :
    - (game.h , game.cpp): Khởi tạo các đối tượng biến chung và các hàng chung
@@ -39,4 +43,6 @@ Các kỹ thuật lập trình :
 - Cậu lệnh if else , switch case
 - Xâu
 - Con trỏ
+- Tự đánh giá:
+- Ngưỡng điểm em mong muốn là 8 điểm.
 
